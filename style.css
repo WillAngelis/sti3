@@ -86,3 +86,56 @@ nav {
   display: flex;
   justify-content: space-between;
 }
+
+.list_tabs {
+  background-color: #e2e8f0;
+  width: 100%;
+  max-width: 1328px;
+  max-height: 429px;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.tabs_head {
+  display: flex;
+  align-items: stretch;
+}
+
+.tabs_toggle {
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #fff;
+  color: #000;
+
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 10px 20px;
+
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.tabs_toggle.active {
+  color: #3182ce;
+  border-bottom: 2px solid #3182ce;
+}
+
+/* Arredondando botões PEDIDOS e MAIS VENDIDOS */
+.tabs_head :nth-child(1) {
+  border-top-left-radius: 8px;
+}
+.tabs_head :nth-child(2) {
+  border-top-right-radius: 8px;
+}
+
+.tabs_body {
+  padding: 16px;
+  background-color: #fff;
+}
+.tabs_content {
+  display: none;
+}
+.tabs_content.is_active {
+  min-height: 169px;
+  display: block;
+}
