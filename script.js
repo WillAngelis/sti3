@@ -47,7 +47,9 @@ const btnConsultar = document
 
 function getData() {
   const purcharses = JSON.parse(localStorage.getItem('purcharses'));
-  
+
+  bestProducts(purcharses);
+
   let table = document.querySelector('.table_content');
   table.innerHTML = ' ';
   purcharses.forEach((el) => {
@@ -84,8 +86,8 @@ function tdStatusCreate(pedido) {
       <path d="M9.75 1.25L1.25 9.75M1.25 1.25L9.75 9.75" stroke="#E53E3E" stroke-width="2"
                           stroke-linecap="round" stroke-linejoin="round" />
                       </svg>` + pedido.status;
-                      tdStatus.classList.add('cancel');
-                    } else {
+    tdStatus.classList.add('cancel');
+  } else {
     tdStatus.innerHTML =
       ` <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11.1091 1L4.15909 9L1 5.36364" stroke="#38A169" stroke-width="2"
@@ -151,4 +153,38 @@ function tdAcaoCreate(pedido) {
                       </svg>`;
   tdAcao.appendChild(div);
   return tdAcao;
+}
+
+function bestProducts(prod) {
+  let productsInfo = [];
+  prod.forEach((element) => {
+    let itens = element.itens;
+    itens.forEach((el) => {
+      productsInfo.push({ nome: el.nome, qnt: el.quantidade });
+    });
+  });
+  filterProducts(productsInfo);
+}
+
+function sumFinder(nome, productsInfo) {
+  return productsInfo.reduce((sum, e) => {
+    e.nome == nome ? (sum += e.qnt) : (sum += 0);
+    return sum;
+  }, 0);
+}
+function filterProducts(productsInfo) {
+  let listOfBestProducts = [];
+  let filteredProducts;
+
+  for (let i = 0; i < productsInfo.length; i++) {
+    const element = productsInfo[i].nome;
+    let obj = { nome: element, qnt: sumFinder(element, productsInfo) };
+    listOfBestProducts.push(obj);
+
+    const nomes = listOfBestProducts.map((prod) => prod.nome);
+    filteredProducts = listOfBestProducts.filter(
+      ({ nome }, index) => !nomes.includes(nome, index + 1)
+    );
+  }
+  console.log(filteredProducts);
 }
