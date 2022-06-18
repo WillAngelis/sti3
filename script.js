@@ -1,3 +1,5 @@
+// Função para alterar entre abas
+
 let tabs = document.querySelectorAll('.tabs_toggle'),
   content = document.querySelectorAll('.tabs_content');
 
@@ -15,7 +17,12 @@ tabs.forEach((tab, index) => {
   });
 });
 
-// entra na pagina e pega dados da api e salva no local storage uma copia
+// Função de data
+const date = new Date();
+const dataAtual = document.querySelector('.data_atual');
+dataAtual.textContent = date.toDateString();
+
+// Entra na pagina e pega dados da api e salva no local storage uma copia
 // ao clicar em consultar pega os dados do local storage
 
 const url =
