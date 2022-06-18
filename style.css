@@ -81,6 +81,10 @@ nav {
 
   cursor: pointer;
 }
+.disabled {
+  cursor: none;
+  opacity: 0.45;
+}
 
 .list_head {
   display: flex;
@@ -120,6 +124,7 @@ nav {
 }
 
 /* Arredondando botões PEDIDOS e MAIS VENDIDOS */
+
 .tabs_head :nth-child(1) {
   border-top-left-radius: 8px;
 }
@@ -208,4 +213,23 @@ nav {
   justify-content: center;
   border-radius: 6px;
   cursor: pointer;
+}
+
+/* Load Style */
+
+.load_text {
+  font-size: 10px;
+  color: #3182ce;
+}
+.load_gif {
+  width: 68px;
+}
+.load_div {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
