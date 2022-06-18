@@ -91,7 +91,6 @@ nav {
   background-color: #e2e8f0;
   width: 100%;
   max-width: 1328px;
-  max-height: 429px;
   border-radius: 8px;
   margin-top: 1rem;
 }
@@ -174,21 +173,27 @@ nav {
   border: 1px solid #ffffff;
   padding: 5px;
 }
-.table td div span {
-  margin-left: 8px;
+.table tr .aproved svg,
+.table tr .cancel svg {
+  margin-right: 8px;
 }
-.table td:nth-child(1) {
+.table td:nth-child(1),
+.table th:nth-child(1) {
   width: 140px;
-  color: #38a169;
   text-align: start;
 }
-.table td:nth-child(2) {
+.table td:nth-child(2),
+.table th:nth-child(2) {
   width: 218px;
   text-align: start;
 }
 .table tr .cancel {
   color: #e53e3e;
 }
+.table tr .aproved {
+  color: #38a169;
+}
+
 .col_edit {
   display: flex;
   align-items: center;
