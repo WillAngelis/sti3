@@ -41,21 +41,32 @@ function saveLocal(purcharses) {
   localStorage.setItem('purcharses', JSON.stringify(purcharses));
 }
 
-const btnConsultar = document
-  .querySelector('.btn_consultar')
-  .addEventListener('click', getData);
+const btnConsultar = document.querySelector('.btn_consultar');
+
+btnConsultar.addEventListener('click', getData);
 
 function getData() {
-  const purcharses = JSON.parse(localStorage.getItem('purcharses'));
-
-  bestProducts(purcharses);
-
   let table = document.querySelector('.table_content');
-  table.innerHTML = ' ';
-  purcharses.forEach((el) => {
-    let tr = createLine(el);
-    table.appendChild(tr);
-  });
+  loading(table);
+  
+  setTimeout(() => {
+    btnConsultar.classList.remove('disabled');
+    table.innerHTML = '';
+    const purcharses = JSON.parse(localStorage.getItem('purcharses'));
+    bestProducts(purcharses);
+    purcharses.forEach((el) => {
+      let tr = createLine(el);
+      table.appendChild(tr);
+    });
+  }, '400');
+}
+
+function loading(table) {
+  btnConsultar.classList.add('disabled');
+  table.innerHTML = `<div class="load_div">
+    <img  class="load_gif" src="./img/loading.gif" alt="">
+    <span class="load_text">Carregando</span>
+  </div>`;
 }
 
 function createLine(pedido) {
