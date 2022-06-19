@@ -178,25 +178,39 @@ function bestProducts(prod) {
   prod.forEach((element) => {
     let itens = element.itens;
     itens.forEach((el) => {
-      productsInfo.push({ nome: el.nome, qnt: el.quantidade });
+      productsInfo.push({
+        nome: el.nome,
+        qnt: el.quantidade,
+        valorUnitario: el.valorUnitario,
+      });
     });
   });
   filterProducts(productsInfo);
 }
 
-function sumFinder(nome, productsInfo) {
+function sumProducts(nome, productsInfo) {
   return productsInfo.reduce((sum, e) => {
     e.nome == nome ? (sum += e.qnt) : (sum += 0);
     return sum;
   }, 0);
 }
+function sumValores(nome, productsInfo) {
+  return productsInfo.reduce((sum, e) => {
+    e.nome == nome ? (sum += e.valorUnitario) : (sum += 0);
+    return sum;
+  }, 0);
+}
+
 function filterProducts(productsInfo) {
   let listOfBestProducts = [];
-  let filteredProducts;
 
   for (let i = 0; i < productsInfo.length; i++) {
     const element = productsInfo[i].nome;
-    let obj = { nome: element, qnt: sumFinder(element, productsInfo) };
+    let obj = {
+      nome: element,
+      qnt: sumProducts(element, productsInfo),
+      total: sumValores(element, productsInfo),
+    };
     listOfBestProducts.push(obj);
 
     const nomes = listOfBestProducts.map((prod) => prod.nome);
