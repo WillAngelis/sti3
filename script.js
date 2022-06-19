@@ -1,22 +1,3 @@
-// Função para alterar entre abas
-
-let tabs = document.querySelectorAll('.tabs_toggle'),
-  content = document.querySelectorAll('.tabs_content');
-
-tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => {
-    content.forEach((content) => {
-      content.classList.remove('is_active');
-    });
-    tabs.forEach((tab) => {
-      tab.classList.remove('is_active');
-    });
-
-    content[index].classList.add('is_active');
-    tabs[index].classList.add('is_active');
-  });
-});
-
 // Função de data
 const date = new Date();
 const dataAtual = document.querySelector('.data_atual');
@@ -26,7 +7,7 @@ dataAtual.textContent = date.toDateString();
 // ao clicar em consultar pega os dados do local storage
 
 const url =
-  'https://justcors.com/tl_c66ad9f/https://desafiotecnicosti3.azurewebsites.net/pedido';
+  'https://justcors.com/tl_49a71e8/https://desafiotecnicosti3.azurewebsites.net/pedido';
 
 window.onload = async function response() {
   try {
@@ -69,7 +50,9 @@ function showPedidos() {
     }
     let topSellTabs = document.querySelector('.sells_head_tab');
     topSellTabs.classList.remove('is_active');
-  }, 200);
+    let pedidosTab = document.querySelector('.pedidos_tab');
+  }, 100);
+  pedidosTab.classList.add('is_active');
 }
 
 const btnConsultar = document.querySelector('.btn_consultar');
@@ -81,11 +64,17 @@ function getData() {
 }
 
 function getDataToTable(table) {
+  let tableContainer = document.querySelector('.table_container');
+  let topSellContainer = document.querySelector('.top_sells_container');
+  if (!tableContainer.classList.contains('is_active')) {
+    tableContainer.classList.add('is_active');
+    topSellContainer.classList.remove('is_active');
+    tabTopSells.classList.remove('is_active');
+  }
   setTimeout(() => {
     btnConsultar.classList.remove('disabled');
     table.innerHTML = '';
     const purcharses = JSON.parse(localStorage.getItem('purcharses'));
-
     purcharses.forEach((el) => {
       let tr = createLine(el);
       table.appendChild(tr);
@@ -255,8 +244,6 @@ tabTopSells.addEventListener('click', showTopSells);
 function showTopSells() {
   let tabsBody = document.querySelector('.tabs_body');
   let tabPedidos = document.querySelectorAll('.list_head_tab');
-  let sells_container = document.querySelector('.top_sells_container');
-  loadingMoreSells(sells_container);
   setTimeout(() => {
     for (let i = 0; i < tabPedidos.length; i++) {
       const element = tabPedidos[i];
@@ -266,7 +253,12 @@ function showTopSells() {
     }
     let topSellTabs = document.querySelector('.sells_head_tab');
     topSellTabs.classList.add('is_active');
+    let pedidosTab = document.querySelector('.pedidos_tab');
+    tabTopSells.classList.add('is_active');
   }, 100);
+  let sells_container = document.querySelector('.top_sells_container');
+  loadingMoreSells(sells_container);
+  pedidosTab.classList.remove('is_active');
 }
 
 let loadingArray = [];
@@ -280,16 +272,17 @@ loadingArray.push(load_text);
 
 function loadingMoreSells(container) {
   let table = document.querySelector('.table_content');
-  container.classList.toggle('is_active');
+  let tableContainer = document.querySelector('.table_container');
+  tableContainer.classList.remove('is_active');
   for (let i = 0; i < loadingArray.length; i++) {
     const element = loadingArray[i];
-    element.classList.toggle('is_active');
+    element.classList.add('is_active');
   }
   setTimeout(() => {
     for (let i = 0; i < loadingArray.length; i++) {
       const element = loadingArray[i];
       element.classList.toggle('is_active');
-      container.classList.toggle('is_active');
+      container.classList.add('is_active');
     }
   }, 200);
   orderForArray(filteredProducts);
