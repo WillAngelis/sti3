@@ -53,6 +53,8 @@
 }
 
 body {
+  overflow-x: hidden;
+  height: 100%;
   background-color: var(--gray-50);
   padding: 1.5rem 2rem;
 }
@@ -65,7 +67,7 @@ nav,
 }
 
 nav {
-  max-width: 1376px;
+  max-width: 95%;
   width: 100%;
   margin: 0 auto;
   justify-content: space-between;
@@ -87,7 +89,7 @@ nav {
 
 .list_container {
   width: 100%;
-  max-width: 1376px;
+  max-width: 95%;
   margin: 0 auto;
   background-color: var(--gray-100);
 
@@ -143,7 +145,7 @@ nav {
 .list_tabs {
   background-color: var(--gray-200);
   width: 100%;
-  max-width: 1328px;
+  max-width: 100%;
   border-radius: 8px;
   margin-top: 1rem;
 }
@@ -195,8 +197,9 @@ nav {
 /* Tabela */
 
 .table {
-  max-width: 1296px;
+  max-width: 100%;
   width: 100%;
+  margin: 0 auto;
   border: 1px solid var(--white);
   border-collapse: collapse;
   padding: 5px;
