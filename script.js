@@ -42,14 +42,37 @@ function copyArray(data) {
   let apiResponse = data;
   let apiRequest = [...apiResponse];
   saveLocal(apiRequest);
+  bestProducts(apiRequest);
 }
 
 function saveLocal(purcharses) {
   localStorage.setItem('purcharses', JSON.stringify(purcharses));
 }
 
-const btnConsultar = document.querySelector('.btn_consultar');
+// Funções para a aba Pedidos
 
+let pedidosTab = document.querySelector('.pedidos_tab');
+pedidosTab.addEventListener('click', showPedidos);
+
+function showPedidos() {
+  let tabsBody = document.querySelector('.tabs_body');
+  let tabPedidos = document.querySelectorAll('.list_head_tab');
+  let sells_container = document.querySelector('.top_sells_container');
+  let table = document.querySelector('.table_content');
+  loadingTable(table);
+  setTimeout(() => {
+    for (let i = 0; i < tabPedidos.length; i++) {
+      const element = tabPedidos[i];
+      if (!element.classList.contains('is_active')) {
+        element.classList.add('is_active');
+      }
+    }
+    let topSellTabs = document.querySelector('.sells_head_tab');
+    topSellTabs.classList.remove('is_active');
+  }, 200);
+}
+
+const btnConsultar = document.querySelector('.btn_consultar');
 btnConsultar.addEventListener('click', getData);
 
 function getData() {
