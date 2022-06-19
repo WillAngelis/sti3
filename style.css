@@ -129,7 +129,12 @@ nav {
   cursor: none;
   opacity: 0.45;
 }
-
+.list_head_tab {
+  display: none;
+}
+.list_head_tab.is_active {
+  display: block;
+}
 .list_head {
   display: flex;
   justify-content: space-between;
@@ -178,6 +183,7 @@ nav {
 
 .tabs_body {
   padding: 16px;
+  min-height: 200px;
   background-color: var(--white);
 }
 
