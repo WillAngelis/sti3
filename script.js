@@ -198,6 +198,7 @@ function tdAcaoCreate(pedido) {
   tdAcao.appendChild(div);
   return tdAcao;
 }
+let filteredProducts; // Array para salvar produtos mais vendidos
 
 function bestProducts(prod) {
   let productsInfo = [];
@@ -244,5 +245,74 @@ function filterProducts(productsInfo) {
       ({ nome }, index) => !nomes.includes(nome, index + 1)
     );
   }
-  console.log(filteredProducts);
+}
+
+//  Funções para aba mais vendidos
+
+let tabTopSells = document.querySelector('.top_sells_tab');
+tabTopSells.addEventListener('click', showTopSells);
+
+function showTopSells() {
+  let tabsBody = document.querySelector('.tabs_body');
+  let tabPedidos = document.querySelectorAll('.list_head_tab');
+  let sells_container = document.querySelector('.top_sells_container');
+  loadingMoreSells(sells_container);
+  setTimeout(() => {
+    for (let i = 0; i < tabPedidos.length; i++) {
+      const element = tabPedidos[i];
+      if (element.classList.contains('is_active')) {
+        element.classList.remove('is_active');
+      }
+    }
+    let topSellTabs = document.querySelector('.sells_head_tab');
+    topSellTabs.classList.add('is_active');
+  }, 100);
+}
+
+let loadingArray = [];
+
+let load_div = document.querySelector('.load_div');
+loadingArray.push(load_div);
+let load_gif = document.querySelector('.load_gif');
+loadingArray.push(load_gif);
+let load_text = document.querySelector('.load_text');
+loadingArray.push(load_text);
+
+function loadingMoreSells(container) {
+  let table = document.querySelector('.table_content');
+  container.classList.toggle('is_active');
+  for (let i = 0; i < loadingArray.length; i++) {
+    const element = loadingArray[i];
+    element.classList.toggle('is_active');
+  }
+  setTimeout(() => {
+    for (let i = 0; i < loadingArray.length; i++) {
+      const element = loadingArray[i];
+      element.classList.toggle('is_active');
+      container.classList.toggle('is_active');
+    }
+  }, 200);
+  orderForArray(filteredProducts);
+}
+function orderForArray(filteredArray) {
+  filteredArray.sort((a, b) => b.qnt - a.qnt);
+  showPodium(filteredArray);
+}
+
+function showPodium(array) {
+  let sells_container = document.querySelector('.top_sells_container');
+
+  sells_container.innerHTML = '';
+  for (let i = 0; i <= 4; i++) {
+    const el = array[i];
+    sells_container.innerHTML += `<div class="podium_place place-${i + 1}">
+              <h2>${i + 1}ª</h2>
+              <h4>${el.nome}</h4>
+              <p>Vendido <span>${el.qnt}</span> vezes</p>
+              <p>Resultou em <span>${el.total.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              })}</span></p>
+            </div>`;
+  }
 }
