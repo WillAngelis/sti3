@@ -54,13 +54,15 @@ btnConsultar.addEventListener('click', getData);
 
 function getData() {
   let table = document.querySelector('.table_content');
-  loading(table);
-  
+  loadingTable(table);
+}
+
+function getDataToTable(table) {
   setTimeout(() => {
     btnConsultar.classList.remove('disabled');
     table.innerHTML = '';
     const purcharses = JSON.parse(localStorage.getItem('purcharses'));
-    bestProducts(purcharses);
+
     purcharses.forEach((el) => {
       let tr = createLine(el);
       table.appendChild(tr);
@@ -68,12 +70,13 @@ function getData() {
   }, '400');
 }
 
-function loading(table) {
+function loadingTable(table) {
   btnConsultar.classList.add('disabled');
-  table.innerHTML = `<div class="load_div">
-    <img  class="load_gif" src="./img/loading.gif" alt="">
-    <span class="load_text">Carregando</span>
+  table.innerHTML = `<div class="load_div is_active">
+    <img  class="load_gif is_active" src="./img/loading.gif" alt="">
+    <span class="load_text is_active">Carregando</span>
   </div>`;
+  getDataToTable(table);
 }
 
 function createLine(pedido) {
