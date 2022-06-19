@@ -114,18 +114,16 @@ function createLine(pedido) {
 function tdStatusCreate(pedido) {
   let tdStatus = document.createElement('td');
   if (pedido.status === 'CANCELADO') {
-    tdStatus.innerHTML =
-      `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    tdStatus.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M9.75 1.25L1.25 9.75M1.25 1.25L9.75 9.75" stroke="#E53E3E" stroke-width="2"
                           stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>` + pedido.status;
+                      </svg><span>${pedido.status} </span>`;
     tdStatus.classList.add('cancel');
   } else {
-    tdStatus.innerHTML =
-      ` <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    tdStatus.innerHTML = ` <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11.1091 1L4.15909 9L1 5.36364" stroke="#38A169" stroke-width="2"
                           stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>` + pedido.status;
+                      </svg><span>${pedido.status} </span>`;
     tdStatus.classList.add('aproved');
   }
   return tdStatus;
@@ -167,18 +165,18 @@ function tdDescontoCreate(pedido) {
 
 function tdTotalCreate(pedido) {
   let tdTotal = document.createElement('td');
-  tdTotal.innerHTML = pedido.valorTotal.toLocaleString('pt-br', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+  tdTotal.innerHTML = convertMoneytoBr(pedido);
   return tdTotal;
 }
 
 function tdAcaoCreate(pedido) {
+  let nomes = pedido.cliente;
+  let endereco = pedido.enderecoEntrega;
   let tdAcao = document.createElement('td');
   tdAcao.classList.add('col_edit');
   let div = document.createElement('div');
   div.classList.add('btn_edit');
+  clientEditBtn(div, nomes, endereco, pedido);
   div.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path
   d="M11.3333 1.92207C11.5084 1.74925 11.7163 1.61216 11.9451 1.51863C12.1738 1.4251 12.419 1.37696 12.6666 1.37696C12.9143 1.37696 13.1595 1.4251 13.3882 1.51863C13.617 1.61216 13.8249 1.74925 14 1.92207C14.1751 2.09489 14.314 2.30006 14.4087 2.52587C14.5035 2.75167 14.5523 2.99368 14.5523 3.23809C14.5523 3.4825 14.5035 3.72451 14.4087 3.95031C14.314 4.17612 14.1751 4.38129 14 4.55411L4.99998 13.4372L1.33331 14.4242L2.33331 10.8052L11.3333 1.92207Z"
