@@ -185,6 +185,196 @@ function tdAcaoCreate(pedido) {
   tdAcao.appendChild(div);
   return tdAcao;
 }
+
+// Função para editar cliente
+
+function clientEditBtn(div, nomes, pedido, endereco) {
+  div.addEventListener('click', () => {
+    let tabPedidos = document.querySelectorAll('.list_head_tab');
+    let edit_btn = document.querySelector('.edit_btns');
+    let edit_container = document.querySelector('.edit_container');
+    let tabsBody = document.querySelector('.tabs_body');
+    let table = document.querySelector('.table');
+    let tabs_head = document.querySelector('.tabs_head');
+
+    tabs_head.classList.add('dont_show');
+    edit_container.classList.add('is_active');
+    edit_btn.classList.add('is_active');
+
+    showEdit(nomes, tabsBody, pedido, endereco);
+    for (let i = 0; i < tabPedidos.length; i++) {
+      const element = tabPedidos[i];
+      if (element.classList.contains('is_active')) {
+        element.classList.remove('is_active');
+      }
+    }
+  });
+}
+function convertMoneytoBr(pedido) {
+  let result = pedido.valorTotal - pedido.desconto;
+  result = result.toLocaleString('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+  return result;
+}
+function showEdit(nomes, tabsBody, endereco, pedido) {
+  tabsBody.innerHTML = '';
+  tabsBody.innerHTML += `<div class="edit_info_container is_active">
+            <div>
+              <h2 class="venda_num">Venda nª1</h2>
+              <div>
+                <span>Data:</span>
+                <p>${new Date(pedido.dataCriacao)}</p>
+              </div>
+              <div>
+                <span>Status:</span>
+                <p>${pedido.status}</p>
+              </div>
+              <div>
+                <span>Desconto:</span>
+                <p>${pedido.desconto.toLocaleString('pt-br', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}</p>
+              </div>
+              <div>
+                <span>Frete:</span>
+                <p>${pedido.frete.toLocaleString('pt-br', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}</p>
+              </div>
+              <div>
+                <span>Subtotal:</span>
+                <p>${pedido.subTotal.toLocaleString('pt-br', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}</p>
+              </div>
+              <div>
+                <span>Total:</span>
+                <p>${convertMoneytoBr(pedido)}</p>
+              </div>
+              <div>
+                <span class="info_endereco">Endereço de entrega:</span>
+                <p class="info_endereco">${endereco.endereco},${
+    endereco.numero
+  }-${endereco.bairro}-${endereco.cidade}(${endereco.estado})</p>
+              </div>
+            </div>
+            <form>
+              <h2> Informações do cliente</h2>
+              <label for="">Nome *</label>
+              <input type="text" placeholder="Digite seu nome" value="${
+                nomes.nome
+              }" class="input input_nome"  disabled>
+              <label for="">E-mail *</label>
+              <input type="text" placeholder="Digite seu email" value="${
+                nomes.email
+              }" class="input input_email"  disabled>
+              <label for="">CPF *</label>
+              <input type="number" placeholder="000.000.000-00" value="${
+                nomes.cpf
+              }" class="input input_cpf"  disabled>
+              <input type="text" placeholder="000.000.000-00" value="${
+                nomes.id
+              }" class="id_input"  disabled>
+            </form>
+          </div>
+        </div>`;
+  let inputs = document.querySelectorAll('.input');
+  let btnEdit = document
+    .querySelector('.editar')
+    .addEventListener('click', () => {
+      for (let i = 0; i < inputs.length; i++) {
+        const element = inputs[i];
+        element.disabled = false;
+        element.value = '';
+      }
+      inputs[0].focus();
+    });
+
+  // Botão Salvar alterações
+  let btnSaveEdit = document.querySelector('.confirm');
+  btnSaveEdit.addEventListener('click', saveEdit);
+}
+
+//  Botão cancelar alterações
+
+let btnGoBackEdit = document.querySelector('.cancel');
+btnGoBackEdit.addEventListener('click', () => {
+  goBackEdit();
+  notifyCancel();
+});
+
+function goBackEdit() {
+  let tabsBody = document.querySelector('.tabs_body');
+  let tabs_head = document.querySelector('.tabs_head');
+  tabs_head.classList.remove('dont_show');
+  let tabPedidos = document.querySelectorAll('.list_head_tab');
+  let edit_btn = document.querySelector('.edit_btns');
+  let edit_container = document.querySelector('.edit_container');
+  edit_btn.classList.remove('is_active');
+  edit_container.classList.remove('is_active');
+  for (let i = 0; i < tabPedidos.length; i++) {
+    const element = tabPedidos[i];
+    if (!element.classList.contains('is_active')) {
+      element.classList.add('is_active');
+    }
+  }
+  tabsBody.innerHTML = `<div class="tabs_content table_container is_active">
+                          <table class="table">
+                            <th>Status</th>
+                            <th>Nome do cliente</th>
+                            <th>Valor</th>
+                            <th>Frete</th>
+                            <th>Desconto</th>
+                            <th>Total</th>
+                            <th>Ações</th>
+                            <tbody class="table_content">
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tabs_content top_sells_container"></div>`;
+  getData();
+}
+
+function saveEdit() {
+  let inputs_name = document.querySelector('.input_nome');
+  let inputs_email = document.querySelector('.input_email');
+  let inputs_cpf = document.querySelector('.input_cpf');
+  let inputs = [];
+  inputs.push(inputs_name);
+  inputs.push(inputs_email);
+  inputs.push(inputs_cpf);
+
+  for (let i = 0; i < inputs.length; i++) {
+    const element = inputs[i];
+    if (element.value == false) {
+      element.classList.add('input_wrong');
+    } else {
+      element.classList.remove('input_wrong');
+    }
+  }
+  if (inputs_name.value && inputs_email.value && inputs_cpf.value != false) {
+    let input_id = document.querySelector('.id_input').value;
+
+    const purcharses = JSON.parse(localStorage.getItem('purcharses'));
+
+    purcharses.forEach((element) => {
+      let cliente = element.cliente;
+      if (cliente.id == input_id) {
+        cliente.nome = inputs_name.value;
+        cliente.email = inputs_email.value;
+        cliente.cpf = inputs_cpf.value;
+      }
+    });
+    localStorage.setItem('purcharses', JSON.stringify(purcharses));
+    goBackEdit();
+    notifySucess();
+  }
+}
 let filteredProducts; // Array para salvar produtos mais vendidos
 
 function bestProducts(prod) {
