@@ -41,18 +41,25 @@
   <main>
     <section class="list_container">
       <div class="list_head">
-        <div>
+        <div class="list_head_tab is_active">
           <h1>Listagem de Produtos</h1>
           <p>Aqui você poderá visualizar todos os pedidos emitidos.</p>
         </div>
-        <button class="btn_consultar">Consultar</button>
-      </div>
+        <div class="list_head_tab is_active">
+          <button class="btn_consultar">Consultar</button>
+        </div>
+        <div class="sells_head_tab">
+          <h1>Produtos mais vendidos</h1>
+          <p>Aqui você poderá observar um ranking com os produtos mais vendidos</p>
+        </div>
       <section class="list_tabs">
         <div class="tabs_head">
-          <span class="tabs_toggle is_active">Pedidos</span>
-          <span class="tabs_toggle">Produtos mais vendidos</span>
+          <span class="tabs_toggle is_active pedidos_tab">Pedidos</span>
+          <span class="tabs_toggle top_sells_tab">Produtos mais vendidos</span>
         </div>
         <div class="tabs_body">
+
+          <!-- Container com tabela de clientes -->
           <div class="tabs_content is_active">
             <table class="table">
               <th>Status</th>
@@ -66,8 +73,11 @@
               </tbody>
             </table>
           </div>
-          <div class="tabs_content">
-            <h1>Mais vendidos</h1>
+          <!-- Fim do container tabela de clientes -->
+
+          <div class="tabs_content top_sells_container">
+
+          </div>
           </div>
         </div>
       </section>
