@@ -52,15 +52,27 @@
           <h1>Produtos mais vendidos</h1>
           <p>Aqui você poderá observar um ranking com os produtos mais vendidos</p>
         </div>
+        <!-- Só é mostrado quando editar um pedido -->
+        <div class="edit_container">
+          <h1><span>Listagem de pedidos</span> > Alteração de pedidos</h1>
+          <p>Aqui você poderá visualizar as informações do pedido e editar as informações do cliente.</p>
+        </div>
+        <div class="edit_btns ">
+          <button class="btn editar">Editar Campos</button>
+          <button class="btn cancel">Cancelar Alterações</button>
+          <button class="btn confirm">Salvar Alterações</button>
+        </div>
+        <!-- Fim do container -->
+      </div>
       <section class="list_tabs">
-        <div class="tabs_head">
+        <div class="tabs_head ">
           <span class="tabs_toggle is_active pedidos_tab">Pedidos</span>
           <span class="tabs_toggle top_sells_tab">Produtos mais vendidos</span>
         </div>
         <div class="tabs_body">
 
           <!-- Container com tabela de clientes -->
-          <div class="tabs_content is_active">
+          <div class="tabs_content table_container">
             <table class="table">
               <th>Status</th>
               <th>Nome do cliente</th>
@@ -78,7 +90,8 @@
           <div class="tabs_content top_sells_container">
 
           </div>
-          </div>
+
+          <!-- Container de Edição -->
         </div>
       </section>
     </section>

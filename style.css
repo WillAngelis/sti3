@@ -249,7 +249,9 @@ nav {
 .table tr .aproved {
   color: var(--green-500);
 }
-
+.dont_show {
+  display: none;
+}
 /* Load Style */
 
 .load_text {
@@ -344,6 +346,99 @@ nav {
   background-color: var(--gray-100);
   color: var(--black);
 }
+
+/* Container de Edição */
+
+.edit_info_container {
+  display: none;
+}
+.id_input {
+  display: none;
+}
+.edit_info_container.is_active {
+  display: flex;
+  align-items: center;
+}
+.edit_info_container div,
+.edit_info_container form {
+  display: flex;
+  width: 50%;
+  height: 260px;
+  flex-direction: column;
+  padding: 8px 0 0;
+}
+.edit_info_container h2 {
+  margin-bottom: 22px;
+  font-size: 18px;
+}
+.edit_info_container span {
+  /* margin-bottom: 10px; */
+  color: var(--gray-700);
+}
+.edit_info_container p.info_endereco {
+  width: fit-content;
+}
+.info_endereco {
+  width: fit-content;
+}
+.list_container .edit_info_container p {
+  margin: 0 0 0 10px;
+  color: var(--black);
+  font-size: 16px;
+}
+.edit_info_container div div {
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  align-items: center;
+}
+.tabs_content {
+  display: none;
+}
+form input {
+  padding: 12px;
+  width: 368px;
+  outline: none;
+  border: none;
+  border: 1px solid var(--gray-200);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+form input::placeholder {
+  color: var(--gray-200);
+}
+
+form label {
+  font-size: 14px;
+  color: var(--gray-700);
+}
+.input_wrong {
+  color: var(--red-500);
+  border-color: var(--red-500);
+  border: 2px solid;
+}
+.input_wrong::placeholder {
+  color: var(--red-500);
+}
+
+/* Edit Container */
+.container_edit {
+  display: flex;
+  justify-content: space-between;
+}
+.edit_container,
+.edit_btns {
+  display: none;
+}
+.edit_container.is_active {
+  display: block;
+}
+
+.edit_btns.is_active {
+  display: flex;
+}
+.edit_container h1 {
+  font-size: 18px;
 }
 
 .col_edit {
@@ -354,24 +449,43 @@ nav {
 .btn_edit {
   width: 24px;
   height: 24px;
-  background-color: #3182ce;
+  background-color: var(--blue-500);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
   cursor: pointer;
 }
+/* Botões */
 
-/* Load Style */
+.btn {
+  /* width: 205px; */
+  height: 48px;
+  padding: 10.5px 24px;
 
-.load_text {
-  font-size: 10px;
-  color: #3182ce;
+  border: none;
+  border-radius: var(--sm-radius);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  min-width: 205px;
 }
-.load_gif {
-  width: 68px;
+
+.btn.confirm {
+  background-color: var(--green-500);
+
+  color: var(--white);
 }
-.load_div {
+.btn.cancel {
+  border: 1px solid var(--red-500);
+  background-color: none;
+  margin: 0 15px;
+  color: var(--red-500);
+}
+.btn.editar {
+  color: var(--white);
+  background-color: var(--blue-500);
+}
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
