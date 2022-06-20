@@ -226,8 +226,8 @@ nav {
 }
 
 .table td {
-  border: 1px solid var(--white);
   padding: 5px;
+  border-bottom: 1px solid var(--gray-200);
 }
 .table tr .aproved svg,
 .table tr .cancel svg {
