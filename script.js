@@ -370,6 +370,21 @@ function saveEdit() {
     notifySucess();
   }
 }
+function notifySucess() {
+  let sucess = document.querySelector('.notifySucess');
+  sucess.classList.add('is_active');
+  setTimeout(() => {
+    sucess.classList.remove('is_active');
+  }, 2500);
+}
+function notifyCancel() {
+  let cancel = document.querySelector('.notifyCancel');
+  cancel.classList.add('is_active');
+  setTimeout(() => {
+    cancel.classList.remove('is_active');
+  }, 2500);
+}
+
 let filteredProducts; // Array para salvar produtos mais vendidos
 
 function salvandoProdMaisVend(array) {
