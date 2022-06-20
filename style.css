@@ -486,11 +486,52 @@ form label {
   color: var(--white);
   background-color: var(--blue-500);
 }
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 35%;
-  display: flex;
-  flex-direction: column;
+/* Notificação */
+
+.notify {
+  background-color: var(--green-500);
+  color: var(--white);
+
+  width: 442px;
+  height: 82px;
+  padding: var(--2);
+
+  position: relative;
+
+  display: none;
   align-items: center;
+  justify-content: center;
+}
+.notifyCancel {
+  background-color: var(--red-500);
+}
+.notify.is_active {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  display: flex;
+  transition: all;
+  -webkit-animation: slide-left 2.5s ease-in-out;
+  animation: slide-left 2.5s ease-in-out;
+}
+.notify p {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.notify span {
+  font-weight: 500;
+}
+
+.svg_close {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+}
+
+.svg_ok {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+}
 }
