@@ -1,7 +1,26 @@
 // Função de data
 const date = new Date();
+const diaEmNum = date.getDate();
+const dia = date.getDay();
+const mes = date.getMonth();
+
 const dataAtual = document.querySelector('.data_atual');
-dataAtual.textContent = date.toDateString();
+const semana = new Array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb');
+const meses = new Array(
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro'
+);
+dataAtual.textContent = `${semana[dia]}, ${diaEmNum}  ${meses[mes + 1]}`;
 
 // Entra na pagina e pega dados da api e salva no local storage uma copia
 // ao clicar em consultar pega os dados do local storage
