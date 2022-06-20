@@ -528,3 +528,29 @@ function showPodium(array) {
             </div>`;
   }
 }
+
+// theme
+let r = document.querySelector(':root');
+const toggleSwitch = document.querySelector(
+  '.theme-switch input[type="checkbox"]'
+);
+
+function switchTheme(e) {
+  let logo = document.querySelector('.nav_logo');
+  let img = document.querySelector('.sliderImg');
+  if (e.target.checked) {
+    logo.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    r.style.setProperty('--gray-700', '#718096');
+    img.setAttribute('src', './img/lua.png');
+    img.style.left = '35px';
+  } else {
+    logo.classList.remove('dark');
+    r.style.setProperty('--gray-700', '#2d3748');
+    img.setAttribute('src', './img/sol.png');
+    img.style.left = '6px';
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+}
+
+toggleSwitch.addEventListener('change', switchTheme, false);
