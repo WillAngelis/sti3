@@ -26,7 +26,7 @@ dataAtual.textContent = `${semana[dia]}, ${diaEmNum}  ${meses[mes + 1]}`;
 // ao clicar em consultar pega os dados do local storage
 
 const urlDaApi =
-  'https://justcors.com/tl_dc28908/https://desafiotecnicosti3.azurewebsites.net/pedido';
+  'https://justcors.com/tl_53ab3f8/https://desafiotecnicosti3.azurewebsites.net/pedido';
 
 window.onload = async function respostaApiFunc() {
   try {
