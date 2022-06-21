@@ -239,7 +239,7 @@ function showEdit(nomes, tabsBody, endereco, pedido) {
               <h2 class="venda_num">Venda nª1</h2>
               <div>
                 <span>Data:</span>
-                <p>${new Date(pedido.dataCriacao)}</p>
+                <p>${retornaData(pedido.dataCriacao)}</p>
               </div>
               <div>
                 <span>Status:</span>
@@ -308,7 +308,19 @@ function showEdit(nomes, tabsBody, endereco, pedido) {
       }
       inputs[0].focus();
     });
+  function retornaData(params) {
+    let dataPed = new Date(params);
+    const dataDiaNum = ('0' + dataPed.getDate()).slice(-2);
+    const dataDiaSemana = dataPed.getDay();
+    const anoDaCompra = dataPed.getFullYear();
+    const meses = ('0' + (dataPed.getMonth() + 1)).slice(-2);
+    let dataFinal = `
+      ${
+        semana[dataDiaSemana]
+      }, ${dataDiaNum}/${meses}/${anoDaCompra} - ${dataPed.toLocaleTimeString()}`;
 
+    return dataFinal;
+  }
   // Botão Salvar alterações
   let btnSaveEdit = document.querySelector('.confirm');
   btnSaveEdit.addEventListener('click', saveEdit);
