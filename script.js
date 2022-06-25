@@ -20,13 +20,12 @@ const meses = new Array(
   'Novembro',
   'Dezembro'
 );
-dataAtual.textContent = `${semana[dia]}, ${diaEmNum}  ${meses[mes + 1]}`;
+dataAtual.textContent = `${semana[dia]}, ${diaEmNum}  ${meses[mes]}`;
 
 // Entra na pagina e pega dados da api e salva no local storage uma copia
 // ao clicar em consultar pega os dados do local storage
 
-const urlDaApi =
-  'https://justcors.com/tl_53ab3f8/https://desafiotecnicosti3.azurewebsites.net/pedido';
+const urlDaApi = 'https://desafiotecnicosti3.azurewebsites.net/pedido';
 
 window.onload = async function respostaApiFunc() {
   try {
